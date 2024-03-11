@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jogo de Adivinhação</title>
+</head>
+<body>
+  <h1>Jogo de Adivinhação</h1>
+  <div id="message"></div>
+  <input type="number" id="guessInput">
+  <button id="guessButton">Adivinhar</button>
+
+  <script>
+    // Geração de um número aleatório entre 1 e 100
+const secretNumber = Math.floor(Math.random() * 100) + 1;
+
+// Variáveis do jogo
+let guessCount = 0;
+let guessedNumber = false;
+
+// Função para adivinhar o número
+function guessNumber() {
+  // Obter o valor digitado pelo jogador
+  const userGuess = parseInt(document.getElementById("guessInput").value);
+
+  // Incrementar o número de tentativas
+  guessCount++;
+
+  // Verificar se o número foi adivinhado corretamente
+  if (userGuess === secretNumber) {
+    guessedNumber = true;
+    displayMessage(`Parabéns! Você adivinhou o número em ${guessCount} tentativas!`);
+  } else if (userGuess < secretNumber) {
+    displayMessage("Tente um número maior.");
+  } else {
+    displayMessage("Tente um número menor.");
+  }
+
+  // Limpar o campo de entrada
+  document.getElementById("guessInput").value = "";
+
+  // Focar novamente no campo de entrada
+  document.getElementById("guessInput").focus();
+}
+
+// Função para exibir mensagens
+function displayMessage(message) {
+  document.getElementById("message").textContent = message;
+}
+
+// Vincular a função guessNumber() ao botão de adivinhar
+document.getElementById("guessButton").addEventListener("click", guessNumber)
+  </script>
+</body>
+</html>
